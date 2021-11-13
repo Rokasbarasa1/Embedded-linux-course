@@ -1,4 +1,5 @@
 #include "hih8120.h"
+#include "photoresistor.h"
 #include <iostream>
 #include <string.h>
 
@@ -26,6 +27,12 @@ void printHumidity(){
     std::cout << hih8120.humidity << std::endl;
 }
 
+void printLightLevel(){
+    greenhouse::photoresistor photoresistor(2);
+    photoresistor.readCurrentLightLevel();
+
+    std::cout << photoresistor.lightLevel << std::endl;
+}
 
 int main(int argc, char** argv) {
     if(argc >= 2){
@@ -47,6 +54,10 @@ int main(int argc, char** argv) {
         }else if(std::string(argv[1]) == "readHumidity"){
             
             printHumidity();
+
+        }else if(std::string(argv[1]) == "readLightLevel"){
+            
+            printLightLevel();
 
         }else{
             
