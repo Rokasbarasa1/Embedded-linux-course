@@ -57,10 +57,10 @@ RM = /snap/clion/169/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mazils/CLionProjects/greenhouse_temp
+CMAKE_SOURCE_DIR = /home/mazils/CLionProjects/iot_exercise
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug
+CMAKE_BINARY_DIR = /home/mazils/CLionProjects/iot_exercise/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/CMakeFiles /home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazils/CLionProjects/iot_exercise/cmake-build-debug/CMakeFiles /home/mazils/CLionProjects/iot_exercise/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazils/CLionProjects/iot_exercise/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,29 +129,29 @@ greenhouse_temp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/build
 .PHONY : greenhouse_temp/fast
 
-IMU/imu.o: IMU/imu.cpp.o
-.PHONY : IMU/imu.o
+heater/Heater.o: heater/Heater.cpp.o
+.PHONY : heater/Heater.o
 
 # target to build an object file
-IMU/imu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/IMU/imu.cpp.o
-.PHONY : IMU/imu.cpp.o
+heater/Heater.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/heater/Heater.cpp.o
+.PHONY : heater/Heater.cpp.o
 
-IMU/imu.i: IMU/imu.cpp.i
-.PHONY : IMU/imu.i
+heater/Heater.i: heater/Heater.cpp.i
+.PHONY : heater/Heater.i
 
 # target to preprocess a source file
-IMU/imu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/IMU/imu.cpp.i
-.PHONY : IMU/imu.cpp.i
+heater/Heater.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/heater/Heater.cpp.i
+.PHONY : heater/Heater.cpp.i
 
-IMU/imu.s: IMU/imu.cpp.s
-.PHONY : IMU/imu.s
+heater/Heater.s: heater/Heater.cpp.s
+.PHONY : heater/Heater.s
 
 # target to generate assembly for a file
-IMU/imu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/IMU/imu.cpp.s
-.PHONY : IMU/imu.cpp.s
+heater/Heater.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/heater/Heater.cpp.s
+.PHONY : heater/Heater.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -177,6 +177,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+temperature/temperature.o: temperature/temperature.cpp.o
+.PHONY : temperature/temperature.o
+
+# target to build an object file
+temperature/temperature.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/temperature/temperature.cpp.o
+.PHONY : temperature/temperature.cpp.o
+
+temperature/temperature.i: temperature/temperature.cpp.i
+.PHONY : temperature/temperature.i
+
+# target to preprocess a source file
+temperature/temperature.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/temperature/temperature.cpp.i
+.PHONY : temperature/temperature.cpp.i
+
+temperature/temperature.s: temperature/temperature.cpp.s
+.PHONY : temperature/temperature.s
+
+# target to generate assembly for a file
+temperature/temperature.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/greenhouse_temp.dir/build.make CMakeFiles/greenhouse_temp.dir/temperature/temperature.cpp.s
+.PHONY : temperature/temperature.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +210,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... greenhouse_temp"
-	@echo "... IMU/imu.o"
-	@echo "... IMU/imu.i"
-	@echo "... IMU/imu.s"
+	@echo "... heater/Heater.o"
+	@echo "... heater/Heater.i"
+	@echo "... heater/Heater.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... temperature/temperature.o"
+	@echo "... temperature/temperature.i"
+	@echo "... temperature/temperature.s"
 .PHONY : help
 
 

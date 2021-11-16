@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug"/>
+				<Option working_dir="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug"/>
+				<Option working_dir="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug"/>
+				<Option working_dir="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="greenhouse_temp">
-				<Option output="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/greenhouse_temp" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug"/>
+				<Option output="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/greenhouse_temp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -54,15 +54,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 greenhouse_temp"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 greenhouse_temp"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="greenhouse_temp/fast">
-				<Option output="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/greenhouse_temp" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug"/>
+				<Option output="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/greenhouse_temp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mazils/CLionProjects/iot_exercise/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -77,23 +77,29 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 greenhouse_temp/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/greenhouse_temp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 greenhouse_temp/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mazils/CLionProjects/iot_exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/mazils/CLionProjects/greenhouse_temp/IMU/imu.cpp">
+		<Unit filename="/home/mazils/CLionProjects/iot_exercise/heater/Heater.cpp">
 			<Option target="greenhouse_temp"/>
 		</Unit>
-		<Unit filename="/home/mazils/CLionProjects/greenhouse_temp/IMU/imu.h">
+		<Unit filename="/home/mazils/CLionProjects/iot_exercise/heater/Heater.h">
 			<Option target="greenhouse_temp"/>
 		</Unit>
-		<Unit filename="/home/mazils/CLionProjects/greenhouse_temp/main.cpp">
+		<Unit filename="/home/mazils/CLionProjects/iot_exercise/main.cpp">
 			<Option target="greenhouse_temp"/>
 		</Unit>
-		<Unit filename="/home/mazils/CLionProjects/greenhouse_temp/CMakeLists.txt">
+		<Unit filename="/home/mazils/CLionProjects/iot_exercise/temperature/temperature.cpp">
+			<Option target="greenhouse_temp"/>
+		</Unit>
+		<Unit filename="/home/mazils/CLionProjects/iot_exercise/temperature/temperature.h">
+			<Option target="greenhouse_temp"/>
+		</Unit>
+		<Unit filename="/home/mazils/CLionProjects/iot_exercise/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
