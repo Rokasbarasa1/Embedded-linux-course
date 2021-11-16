@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greenhouse device</title>
+    <script src = "/socket.io/socket.io.js" ></script>
+    <script>
+        // Establishing connection with server
+        var socket = io.connect();
+
+        //User functionality handling
+        function refreshData(){
+            socket.emit('refreshData', {state:1});
+        }
+
+        function isNumeric(str) {
+            if (typeof str != "string") return false // we only process strings!  
+            return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+                    !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+        }
+
+        function changeStateLight(){
+            const value = document.getElementById("lightLevel").value; 
+            var quit = false;
+            for (let i = 0; i < value.length; i++) {
+                if(value[i] == '.'){
+                    quit = true;
+                }
+            } 
+            if (!quit && isNumeric(value) && parseInt(value) >= 0 && parseInt(value) <= 100 ){
+                console.log(value)
+                const valueInt = parseInt(value);
+                socket.emit('changeStateLight', '{"state":'+ valueInt +'}');
+            }else{
+                document.getElementById("lightLevel").value = "Enter valid integer from 0-100";
+            }
+        }
+
+        function changeWindowState(state){
+            if (state==1){
+                socket.emit('changeWindowState', '{"state":1}');
+            }else if (state==0){
+                socket.emit('changeWindowState', '{"state":0}');
+            }
+        }
+
+        function changeHeaterState(state){
+            if (state==1){
+                socket.emit('changeHeaterState', '{"state":1}');
+            }else if (state==0){
+                socket.emit('changeHeaterState', '{"state":0}');
+            }
+        }
+
+        //Server response handling
+        socket.on("responseRefresh", (args) => {
+            console.log("Got refresh response from server")
+
+            document.getElementById("tempStatus").innerHTML = "Status: " + args.temperature + " C";
+            document.getElementById("humStatus").innerHTML = "Status: " + args.humidity + " %RH";
+            document.getElementById("lightStatus").innerHTML = "Status: " + args.light + " %";
+            document.getElementById("windowStatus").innerHTML = "Status: " + args.window;
+            document.getElementById("heaterStatus").innerHTML = "Status: " + args.heater;
+        });
+
+        socket.on("responseSetLight", (args) => {
+            console.log("Got light response from server")
+            document.getElementById("lightStatus").innerHTML = "Status: " + args.light + " %";
+
+        });
+
+        socket.on("responseSetWindow", (args) => {
+            console.log("Got window response from server")
+            document.getElementById("windowStatus").innerHTML = "Status: " + args.window;
+        });
+
+        socket.on("responseSetHeater", (args) => {
+            console.log("Got heater response from server")
+            document.getElementById("heaterStatus").innerHTML = "Status: " + args.heater;
+        });
+        
+    </script>
+</head>
+<body>
+    <h2>REFRESH</h2>
+    <button type="button" onclick="refreshData();">Refresh data</button>
+
+    <h2>Temperature</h2>
+    <p id="tempStatus">Status: </p>
+
+    <h2>Humidity</h2>
+    <p id="humStatus">Status: </p>
+
+    <h2>Light</h2>
+    <p id="lightStatus">Status: </p>
+    <input type="text" id="lightLevel" name="fname"><br><br>
+    <button type="button" onclick="changeStateLight();">Set value</button>
+
+    <h2>Window</h2>
+    <p id="windowStatus">Status: </p>
+    <button type="button" onclick="changeWindowState(1);">ON</button>
+    <button type="button" onclick="changeWindowState(0);">OFF</button>
+
+    <h2>Heater</h2>
+    <p id="heaterStatus">Status: </p>
+    <button type="button" onclick="changeHeaterState(1);">ON</button>
+    <button type="button" onclick="changeHeaterState(0);">OFF</button>
+
+</body>
+</html>
+
