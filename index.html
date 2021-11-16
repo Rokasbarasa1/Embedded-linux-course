@@ -12,6 +12,13 @@
             socket.emit('refreshData', {state:1});
         }
 
+        const interval = setInterval(function() {
+            refreshData()
+        }, 5000);
+
+        clearInterval(interval);
+
+        
         function isNumeric(str) {
             if (typeof str != "string") return false // we only process strings!  
             return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
@@ -60,11 +67,13 @@
             document.getElementById("lightStatus").innerHTML = "Status: " + args.light + " %";
             document.getElementById("windowStatus").innerHTML = "Status: " + args.window;
             document.getElementById("heaterStatus").innerHTML = "Status: " + args.heater;
+            document.getElementById("ledLightStatus").innerHTML = "Status: " + args.ledLight + " %";
+
         });
 
         socket.on("responseSetLight", (args) => {
             console.log("Got light response from server")
-            document.getElementById("lightStatus").innerHTML = "Status: " + args.light + " %";
+            document.getElementById("ledLightStatus").innerHTML = "Status: " + args.ledLight + " %";
 
         });
 
@@ -90,15 +99,18 @@
     <h2>Humidity</h2>
     <p id="humStatus">Status: </p>
 
-    <h2>Light</h2>
+    <h2>Light level</h2>
     <p id="lightStatus">Status: </p>
+
+    <h2>Led light level</h2>
+    <p id="ledLightStatus">Status: </p>
     <input type="text" id="lightLevel" name="fname"><br><br>
     <button type="button" onclick="changeStateLight();">Set value</button>
 
     <h2>Window</h2>
     <p id="windowStatus">Status: </p>
-    <button type="button" onclick="changeWindowState(1);">ON</button>
-    <button type="button" onclick="changeWindowState(0);">OFF</button>
+    <button type="button" onclick="changeWindowState(1);">OPEN</button>
+    <button type="button" onclick="changeWindowState(0);">CLOSED</button>
 
     <h2>Heater</h2>
     <p id="heaterStatus">Status: </p>

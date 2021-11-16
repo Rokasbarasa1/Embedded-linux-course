@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
+const exec = require('child_process').execSync;
 const execFile = require('child_process').execFile;
 
 var server = http.createServer(function (req, res) {
@@ -40,43 +41,34 @@ async function handleRefreshData(socket, data) {
     var light = "NaN"
     var window = "NaN"
     var heater = "NaN"
-    
+    var ledLight = "NaN"
+
+
     // Read humidity/temperature
-	await execFile('./test', ['readTempAndHumidity'], (error, stdout, stderr) => {
-        if(error) { throw error;}
+    var result = exec('./test readTempAndHumidity');
+    strings = result.toString("utf8").split('\n');
+    temperature = strings[0].substring(13, 17);
+    humidity = strings[1].substring(13, 17);
 
-        temperature = stdout[5];
-        humidity = stdout[5];
-
-        console.log("\""+stdout+"\"");
-    });
 
     //Read light
-    await execFile('./test', ['readLightLevel'], (error, stdout, stderr) => {
-        if(error) { throw error;}
+    var result = exec('./test readLightLevel');
+    light = result.toString("utf8").substring(13, 18);
 
-        light = stdout[5];
-
-        console.log("\""+stdout+"\"");
-    });
 
     //Read window
-    await execFile('./test', ['readWindow'], (error, stdout, stderr) => {
-        if(error) { throw error;}
+    var result = exec('./test readWindow');
+    window = result.toString("utf8").substring(13, 19);
 
-        window = stdout[5];
 
-        console.log("\""+stdout+"\"");
-    });
-    
     //Read heater
-    await execFile('./test', ['readHeater'], (error, stdout, stderr) => {
-        if(error) { throw error;}
+    var result = exec('./test readHeater');
+    heater = result.toString("utf8").substring(13, 16);
 
-        heater = stdout[5];
-        
-        console.log("\""+stdout+"\"");
-    });
+
+    //Read led light
+    var result = exec('./test readLedLight');
+    ledLight = result.toString("utf8").substring(13, 19);
 
     socket.emit("responseRefresh", 
         {
@@ -85,24 +77,25 @@ async function handleRefreshData(socket, data) {
             light: light,
             window: window,
             heater: heater,
+            ledLight: ledLight
         }
     );
 }
 
 async function handleChangeStateLight(socket, data) {
     var newData = JSON.parse(data);
-    await execFile('./test', ['setLightLevel', newData.state], (error, stdout, stderr) => {
+    execFile('./test', ['setLedLight', newData.state], (error, stdout, stderr) => {
         if(error) { throw error;}
-        execFile('./test', ['readLightLevel'], (error, stdout, stderr) => {
-            if(error) { throw error;}
-
-            socket.emit("responseSetLight", 
-                {
-                    light: newData.state
-                }
-            );
-        });
         
+        //Read led light
+        var result = exec('./test readLedLight');
+        var ledLight = result.toString("utf8").substring(13, 19);
+        
+        socket.emit("responseSetLight", 
+            {
+                ledLight: ledLight
+            }
+        );
     });
 }
 
@@ -116,15 +109,16 @@ async function handleChangeWindowState(socket, data) {
     }
     execFile('./test', ['setWindowStatus', command], (error, stdout, stderr) => {
         if(error) { throw error;}
-        execFile('./test', ['readWindow'], (error, stdout, stderr) => {
-            if(error) { throw error;}
 
-            socket.emit("responseSetWindow", 
-                {
-                    window: command
-                }
-            );
-        });
+        //Read window
+        var result = exec('./test readWindow');
+        var window = result.toString("utf8").substring(13, 19);
+
+        socket.emit("responseSetWindow", 
+            {
+                window: window
+            }
+        );
     });
 }
 
@@ -135,17 +129,17 @@ async function handleChangeHeaterState(socket, data) {
     }else{
         command = "off"
     }
-    await execFile('./test', ['setHeaterStatus', command], (error, stdout, stderr) => {
+    execFile('./test', ['setHeaterStatus', command], (error, stdout, stderr) => {
         if(error) { throw error;}
-        execFile('./test', ['readHeater', command], (error, stdout, stderr) => {
-            if(error) { throw error;}
 
-            socket.emit("responseSetHeater", 
-                {
-                    heater: command
-                }
-            );
-        });
+        //Read heater
+        var result = exec('./test readHeater');
+        var heater = result.toString("utf8").substring(13, 16);
+        socket.emit("responseSetHeater", 
+            {
+                heater: heater
+            }
+        );
     });
 }
 
