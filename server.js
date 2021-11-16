@@ -28,92 +28,125 @@ var server = http.createServer(function (req, res) {
 var io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
-    socket.on('refreshData', (data) => handlerefreshData(socket, data));
+    socket.on('refreshData', (data) => handleRefreshData(socket, data));
     socket.on('changeStateLight', (data) => handleChangeStateLight(socket, data));
     socket.on('changeWindowState', (data) => handleChangeWindowState(socket, data));
     socket.on('changeHeaterState', (data) => handleChangeHeaterState(socket, data));
 });
 
-async function handlerefreshData(socket, data) {
-    socket.emit("responseRefresh", 
-        {
-            temperature: 23.5,
-            humidity: 50.5,
-            light: "50",
-            window: "OPEN",
-            heater: "ON",
-        }
-    );
+async function handleRefreshData(socket, data) {
+    var temperature = "NaN"
+    var humidity = "NaN"
+    var light = "NaN"
+    var window = "NaN"
+    var heater = "NaN"
     
     // Read humidity/temperature
-	await execFile('./test readTempAndHumidity', (error, stdout, stderr) => {
+	await execFile('./test', ['readTempAndHumidity'], (error, stdout, stderr) => {
         if(error) { throw error;}
-        console.log(stdout);
+
+        temperature = stdout[5];
+        humidity = stdout[5];
+
+        console.log("\""+stdout+"\"");
     });
 
     //Read light
-    await execFile('./test readLightLevel', (error, stdout, stderr) => {
+    await execFile('./test', ['readLightLevel'], (error, stdout, stderr) => {
         if(error) { throw error;}
-        console.log(stdout);
+
+        light = stdout[5];
+
+        console.log("\""+stdout+"\"");
     });
 
     //Read window
-    await execFile('./test readWindow', (error, stdout, stderr) => {
+    await execFile('./test', ['readWindow'], (error, stdout, stderr) => {
         if(error) { throw error;}
-        console.log(stdout);
+
+        window = stdout[5];
+
+        console.log("\""+stdout+"\"");
     });
     
     //Read heater
-    await execFile('./test readHeater', (error, stdout, stderr) => {
+    await execFile('./test', ['readHeater'], (error, stdout, stderr) => {
         if(error) { throw error;}
-        console.log(stdout);
+
+        heater = stdout[5];
+        
+        console.log("\""+stdout+"\"");
     });
+
+    socket.emit("responseRefresh", 
+        {
+            temperature: temperature,
+            humidity: humidity,
+            light: light,
+            window: window,
+            heater: heater,
+        }
+    );
 }
 
 async function handleChangeStateLight(socket, data) {
     var newData = JSON.parse(data);
-    console.log("Light = " + newData.state);
+    await execFile('./test', ['setLightLevel', newData.state], (error, stdout, stderr) => {
+        if(error) { throw error;}
+        execFile('./test', ['readLightLevel'], (error, stdout, stderr) => {
+            if(error) { throw error;}
 
-    //await execFile('./test setLightLevel '+ newData.state, (error, stdout, stderr) => {
-    //     if(error) { throw error;}
-    //     console.log(stdout);
-    // });
-
-    socket.emit("responseSetLight", 
-        {
-            light: newData.state
-        }
-    );
+            socket.emit("responseSetLight", 
+                {
+                    light: newData.state
+                }
+            );
+        });
+        
+    });
 }
 
 async function handleChangeWindowState(socket, data) {
     var newData = JSON.parse(data);
-    console.log("Window = " + newData.state);
-    // await execFile('./test setWindowSatus '+ newData.state, (error, stdout, stderr) => {
-    //     if(error) { throw error;}
-    //     console.log(stdout);
-    // });
+    var command;
+    if(newData.state == 1){
+        command = "open"
+    }else{
+        command = "close"
+    }
+    execFile('./test', ['setWindowStatus', command], (error, stdout, stderr) => {
+        if(error) { throw error;}
+        execFile('./test', ['readWindow'], (error, stdout, stderr) => {
+            if(error) { throw error;}
 
-    socket.emit("responseSetWindow", 
-        {
-            window: newData.state
-        }
-    );
+            socket.emit("responseSetWindow", 
+                {
+                    window: command
+                }
+            );
+        });
+    });
 }
 
 async function handleChangeHeaterState(socket, data) {
     var newData = JSON.parse(data);
-    console.log("heater = " + newData.state);
-    // await execFile('./test setHeaterStatus ' + newData.state, (error, stdout, stderr) => {
-    //     if(error) { throw error;}
-    //     console.log(stdout);
-    // });
+    if(newData.state == 1){
+        command = "on"
+    }else{
+        command = "off"
+    }
+    await execFile('./test', ['setHeaterStatus', command], (error, stdout, stderr) => {
+        if(error) { throw error;}
+        execFile('./test', ['readHeater', command], (error, stdout, stderr) => {
+            if(error) { throw error;}
 
-    socket.emit("responseSetHeater", 
-        {
-            heater: newData.state
-        }
-    );
+            socket.emit("responseSetHeater", 
+                {
+                    heater: command
+                }
+            );
+        });
+    });
 }
 
 console.log("Server Running ...");

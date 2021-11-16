@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
             
             printLightLevel();
         }
-        else if(std::string(argv[1]) == "controlLightIntensity")
+        else if(std::string(argv[1]) == "setLightLevel")
         {
             controlLightIntensity(atoi(argv[2]));
         }
@@ -117,15 +117,15 @@ int main(int argc, char** argv) {
         {
             readLightIntensity();
         }
-        else if(std::string(argv[1]) == "controlWindow")
+        else if(std::string(argv[1]) == "setWindowStatus")
         {
             controlServo(argv[2]);
         }
-        else if(std::string(argv[1]) == "readWindowPos")
+        else if(std::string(argv[1]) == "readWindow")
         {
             readWindowPos();
         }
-        else if(std::string(argv[1]) == "heater")
+        else if(std::string(argv[1]) == "setHeaterStatus")
         {
             heaterOnOff(argv[2]);
         }
