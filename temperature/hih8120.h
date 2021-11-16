@@ -1,4 +1,4 @@
-#include "I2CDevice.h"
+#include "../I2CDevice.h"
 
 namespace greenhouse {
 

@@ -20,7 +20,7 @@ namespace greenhouse {
     void photoresistor::readCurrentLightLevel(){
         ifstream indata;
         char data[4];
-        indata.open("/sys/bus/iio/devices/iio\\\:device0/in_voltage0_raw");
+        indata.open("/sys/bus/iio/devices/iio\:device0/in_voltage0_raw");
         indata >> data;        
         indata.close();
 
@@ -31,7 +31,7 @@ namespace greenhouse {
 
     float photoresistor::mapVoltsToPercentage(unsigned int value){
         int min = 0;
-        int max = 5000;
+        float max = 3700;
         //Also rounds the value to single decimal
         return floor((value/max * 100.0) * 10) / 10;
     }
