@@ -7,17 +7,12 @@
         // Establishing connection with server
         var socket = io.connect();
 
-        //User functionality handling
-        function refreshData(){
+        function refreshData() {
+            console.log()
             socket.emit('refreshData', {state:1});
         }
 
-        const interval = setInterval(function() {
-            refreshData()
-        }, 5000);
-
-        clearInterval(interval);
-
+        const createClock = setInterval(refreshData, 5000);
         
         function isNumeric(str) {
             if (typeof str != "string") return false // we only process strings!  
@@ -90,8 +85,8 @@
     </script>
 </head>
 <body>
-    <h2>REFRESH</h2>
-    <button type="button" onclick="refreshData();">Refresh data</button>
+    <!-- <h2>REFRESH</h2>
+    <button type="button" onclick="refreshData();">Refresh data</button> -->
 
     <h2>Temperature</h2>
     <p id="tempStatus">Status: </p>

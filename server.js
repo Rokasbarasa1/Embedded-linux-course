@@ -4,6 +4,21 @@ var path = require('path');
 const exec = require('child_process').execSync;
 const execFile = require('child_process').execFile;
 
+//Set light to default 0
+execFile('./test', ['setLedLight', '0'], (error, stdout, stderr) => {
+    if(error) { throw error;}
+});
+
+//Set window to default closed
+execFile('./test', ['setWindowStatus', 'close'], (error, stdout, stderr) => {
+    if(error) { throw error;}
+});
+
+//Set window to default closed
+execFile('./test', ['setHeaterStatus', 'off'], (error, stdout, stderr) => {
+    if(error) { throw error;}
+});
+
 var server = http.createServer(function (req, res) {
     var file = '.'+((req.url=='/')?'/index.html':req.url);
     var fileExtension = path.extname(file);
@@ -55,21 +70,18 @@ async function handleRefreshData(socket, data) {
     var result = exec('./test readLightLevel');
     light = result.toString("utf8").substring(13, 18);
 
-
     //Read window
     var result = exec('./test readWindow');
     window = result.toString("utf8").substring(13, 19);
-
 
     //Read heater
     var result = exec('./test readHeater');
     heater = result.toString("utf8").substring(13, 16);
 
-
     //Read led light
     var result = exec('./test readLedLight');
     ledLight = result.toString("utf8").substring(13, 19);
-
+  
     socket.emit("responseRefresh", 
         {
             temperature: temperature,
