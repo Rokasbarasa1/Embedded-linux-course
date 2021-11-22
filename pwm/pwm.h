@@ -11,11 +11,13 @@
 
 class pwm {
 public:
+    //Constructor which initializes the pins for pwm leds and servo 
     pwm()
     {
         system("config-pin P9_22 pwm");
         system("config-pin P9_21 pwm");
     }
+
     void send_pwm(int duty_cycle, int period,int channel);
     void send_pwm_percentage(int perc, int period,int channel);
 
