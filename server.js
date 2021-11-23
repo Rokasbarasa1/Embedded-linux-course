@@ -1,3 +1,8 @@
+/**
+ * @author Rokas Barasa (285047@via.dk)
+ * @author Arturas Maziliauskas (285051@via.dk)
+ * @date 2021-11-23
+ */
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
