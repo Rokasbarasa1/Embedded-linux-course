@@ -1,9 +1,10 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-const exec = require('child_process').execSync;
+const exec = require('child_process').execSync; 
 const execFile = require('child_process').execFile;
 
+/// SET DEFAULT STATE 
 //Set light to default 0
 execFile('./greenhouse', ['setLedLight', '0'], (error, stdout, stderr) => {
     if(error) { throw error;}
@@ -19,6 +20,9 @@ execFile('./greenhouse', ['setHeaterStatus', 'off'], (error, stdout, stderr) => 
     if(error) { throw error;}
 });
 
+
+
+//Create server and start to listen
 var server = http.createServer(function (req, res) {
     var file = '.'+((req.url=='/')?'/index.html':req.url);
     var fileExtension = path.extname(file);
@@ -43,13 +47,16 @@ var server = http.createServer(function (req, res) {
 
 var io = require('socket.io')(server);
 
+// Recieve client requests
 io.on('connection', function (socket) {
+    // Pass the socket and the data that was sent to the function.
     socket.on('refreshData', (data) => handleRefreshData(socket, data));
     socket.on('changeStateLight', (data) => handleChangeStateLight(socket, data));
     socket.on('changeWindowState', (data) => handleChangeWindowState(socket, data));
     socket.on('changeHeaterState', (data) => handleChangeHeaterState(socket, data));
 });
 
+// Read all current values form the peripherals and return it to the client that is connected to socket
 async function handleRefreshData(socket, data) {
     var temperature = "NaN"
     var humidity = "NaN"
@@ -65,6 +72,7 @@ async function handleRefreshData(socket, data) {
     temperature = strings[0].substring(13, 17);
     humidity = strings[1].substring(13, 17);
 
+    // Perform synchronus calls to the peripheral, get result then parse it
 
     //Read light
     var result = exec('./greenhouse readLightLevel');
@@ -82,6 +90,7 @@ async function handleRefreshData(socket, data) {
     var result = exec('./greenhouse readLedLight');
     ledLight = result.toString("utf8").substring(13, 19);
   
+    // Compile every result into specific json dictionary and send it to user
     socket.emit("responseRefresh", 
         {
             temperature: temperature,
@@ -94,12 +103,19 @@ async function handleRefreshData(socket, data) {
     );
 }
 
+// Handle user changing led light state
 async function handleChangeStateLight(socket, data) {
+    // Parse the json data into a dictionary
     var newData = JSON.parse(data);
+
+    // Asynchronously change the state of the led light by passing what functionality to perform
+    // and parameter to set
     execFile('./greenhouse', ['setLedLight', newData.state], (error, stdout, stderr) => {
         if(error) { throw error;}
         
-        //Read led light
+        // After each modify peripheral call make call to read the current state and return that to the client.
+
+        // Read led light
         var result = exec('./greenhouse readLedLight');
         var ledLight = result.toString("utf8").substring(13, 19);
         
@@ -111,6 +127,7 @@ async function handleChangeStateLight(socket, data) {
     });
 }
 
+// Same as "handleChangeStateLight" just different peripheral called
 async function handleChangeWindowState(socket, data) {
     var newData = JSON.parse(data);
     var command;
@@ -134,6 +151,7 @@ async function handleChangeWindowState(socket, data) {
     });
 }
 
+// Same as "handleChangeStateLight" just different peripheral called
 async function handleChangeHeaterState(socket, data) {
     var newData = JSON.parse(data);
     if(newData.state == 1){

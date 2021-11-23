@@ -12,27 +12,35 @@
         // Establishing connection with server
         var socket = io.connect();
 
+        // Function that every five seconds to get the latest data from the server
         function refreshData() {
-            console.log()
+            //What data it sends is not important
             socket.emit('refreshData', {state:1});
         }
-
+        // Call to make function repeating
         const createClock = setInterval(refreshData, 5000);
         
+        // Function to help checking of user input
         function isNumeric(str) {
             if (typeof str != "string") return false // we only process strings!  
             return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
                     !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
         }
 
+        // Handles user input to change the led light percentage
         function changeStateLight(){
+            // Read text from input box
             const value = document.getElementById("lightLevel").value; 
             var quit = false;
+
+            // Manualy check that number is not float
             for (let i = 0; i < value.length; i++) {
                 if(value[i] == '.'){
                     quit = true;
                 }
             } 
+            
+            // Sends signal to server if value is 0-100 integer
             if (!quit && isNumeric(value) && parseInt(value) >= 0 && parseInt(value) <= 100 ){
                 console.log(value)
                 const valueInt = parseInt(value);
@@ -42,6 +50,7 @@
             }
         }
 
+        // Handles user clicking window button open or close
         function changeWindowState(state){
             if (state==1){
                 socket.emit('changeWindowState', '{"state":1}');
@@ -50,6 +59,7 @@
             }
         }
 
+        // Handles user clicking heater buttons on or off
         function changeHeaterState(state){
             if (state==1){
                 socket.emit('changeHeaterState', '{"state":1}');
@@ -58,10 +68,11 @@
             }
         }
 
-        //Server response handling
+        // Handle refresh of data sent form server
         socket.on("responseRefresh", (args) => {
             console.log("Got refresh response from server")
-
+            
+            // args extracted from json
             document.getElementById("tempStatus").innerHTML = "Status: " + args.temperature + " C";
             document.getElementById("humStatus").innerHTML = "Status: " + args.humidity + " %RH";
             document.getElementById("lightStatus").innerHTML = "Status: " + args.light + " %";
@@ -71,17 +82,20 @@
 
         });
 
+        // Response to set light level request
         socket.on("responseSetLight", (args) => {
             console.log("Got light response from server")
             document.getElementById("ledLightStatus").innerHTML = "Status: " + args.ledLight + " %";
 
         });
 
+        // Response to set window state request
         socket.on("responseSetWindow", (args) => {
             console.log("Got window response from server")
             document.getElementById("windowStatus").innerHTML = "Status: " + args.window;
         });
 
+        // Response to set heater state request
         socket.on("responseSetHeater", (args) => {
             console.log("Got heater response from server")
             document.getElementById("heaterStatus").innerHTML = "Status: " + args.heater;
@@ -90,9 +104,9 @@
     </script>
 </head>
 <body>
-    <!-- <h2>REFRESH</h2>
-    <button type="button" onclick="refreshData();">Refresh data</button> -->
 
+    <!-- User interface  -->
+    
     <h2>Temperature</h2>
     <p id="tempStatus">Status: </p>
 

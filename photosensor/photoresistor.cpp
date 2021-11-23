@@ -22,15 +22,17 @@ namespace greenhouse {
         this->lightLevel = I2CBus;
     }
 
+    // Readd corrent value from photoresistor
     void photoresistor::readCurrentLightLevel(){
+        // Read from file and take only 4 character
         ifstream indata;
         char data[4];
         indata.open("/sys/bus/iio/devices/iio\:device0/in_voltage0_raw");
         indata >> data;        
         indata.close();
 
+        //Convert to int and map the value to be 0-100 percentage, then set it as the stored light level variable
         int value = atoi(data);
-        //READ SOME FILE 
         this->lightLevel = this->mapVoltsToPercentage(value);
     }
 
