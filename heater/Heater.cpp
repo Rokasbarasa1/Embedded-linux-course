@@ -1,7 +1,8 @@
-//
-// Created by mazils on 2021. 11. 14..
-//
-
+/**
+ * @author Rokas Barasa (285047@via.dk)
+ * @author Arturas Maziliauskas (285051@via.dk)
+ * @date 2021-11-23
+ */
 #include "Heater.h"
 
 void Heater::turnOnHeater()

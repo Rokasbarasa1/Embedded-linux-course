@@ -5,17 +5,17 @@ const exec = require('child_process').execSync;
 const execFile = require('child_process').execFile;
 
 //Set light to default 0
-execFile('./test', ['setLedLight', '0'], (error, stdout, stderr) => {
+execFile('./greenhouse', ['setLedLight', '0'], (error, stdout, stderr) => {
     if(error) { throw error;}
 });
 
 //Set window to default closed
-execFile('./test', ['setWindowStatus', 'close'], (error, stdout, stderr) => {
+execFile('./greenhouse', ['setWindowStatus', 'close'], (error, stdout, stderr) => {
     if(error) { throw error;}
 });
 
 //Set window to default closed
-execFile('./test', ['setHeaterStatus', 'off'], (error, stdout, stderr) => {
+execFile('./greenhouse', ['setHeaterStatus', 'off'], (error, stdout, stderr) => {
     if(error) { throw error;}
 });
 
@@ -60,26 +60,26 @@ async function handleRefreshData(socket, data) {
 
 
     // Read humidity/temperature
-    var result = exec('./test readTempAndHumidity');
+    var result = exec('./greenhouse readTempAndHumidity');
     strings = result.toString("utf8").split('\n');
     temperature = strings[0].substring(13, 17);
     humidity = strings[1].substring(13, 17);
 
 
     //Read light
-    var result = exec('./test readLightLevel');
+    var result = exec('./greenhouse readLightLevel');
     light = result.toString("utf8").substring(13, 18);
 
     //Read window
-    var result = exec('./test readWindow');
+    var result = exec('./greenhouse readWindow');
     window = result.toString("utf8").substring(13, 19);
 
     //Read heater
-    var result = exec('./test readHeater');
+    var result = exec('./greenhouse readHeater');
     heater = result.toString("utf8").substring(13, 16);
 
     //Read led light
-    var result = exec('./test readLedLight');
+    var result = exec('./greenhouse readLedLight');
     ledLight = result.toString("utf8").substring(13, 19);
   
     socket.emit("responseRefresh", 
@@ -96,11 +96,11 @@ async function handleRefreshData(socket, data) {
 
 async function handleChangeStateLight(socket, data) {
     var newData = JSON.parse(data);
-    execFile('./test', ['setLedLight', newData.state], (error, stdout, stderr) => {
+    execFile('./greenhouse', ['setLedLight', newData.state], (error, stdout, stderr) => {
         if(error) { throw error;}
         
         //Read led light
-        var result = exec('./test readLedLight');
+        var result = exec('./greenhouse readLedLight');
         var ledLight = result.toString("utf8").substring(13, 19);
         
         socket.emit("responseSetLight", 
@@ -119,11 +119,11 @@ async function handleChangeWindowState(socket, data) {
     }else{
         command = "close"
     }
-    execFile('./test', ['setWindowStatus', command], (error, stdout, stderr) => {
+    execFile('./greenhouse', ['setWindowStatus', command], (error, stdout, stderr) => {
         if(error) { throw error;}
 
         //Read window
-        var result = exec('./test readWindow');
+        var result = exec('./greenhouse readWindow');
         var window = result.toString("utf8").substring(13, 19);
 
         socket.emit("responseSetWindow", 
@@ -141,11 +141,11 @@ async function handleChangeHeaterState(socket, data) {
     }else{
         command = "off"
     }
-    execFile('./test', ['setHeaterStatus', command], (error, stdout, stderr) => {
+    execFile('./greenhouse', ['setHeaterStatus', command], (error, stdout, stderr) => {
         if(error) { throw error;}
 
         //Read heater
-        var result = exec('./test readHeater');
+        var result = exec('./greenhouse readHeater');
         var heater = result.toString("utf8").substring(13, 16);
         socket.emit("responseSetHeater", 
             {

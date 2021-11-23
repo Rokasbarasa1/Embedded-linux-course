@@ -1,6 +1,8 @@
-//
-// Created by mazils on 2021. 10. 23..
-//
+/**
+ * @author Rokas Barasa (285047@via.dk)
+ * @author Arturas Maziliauskas (285051@via.dk)
+ * @date 2021-11-23
+ */
 
 #ifndef BEAGLEBONEGREENHOUSE_PWM_H
 #define BEAGLEBONEGREENHOUSE_PWM_H

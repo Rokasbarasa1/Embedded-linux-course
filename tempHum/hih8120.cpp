@@ -1,4 +1,9 @@
 #include "hih8120.h"
+/**
+ * @author Rokas Barasa (285047@via.dk)
+ * @author Arturas Maziliauskas (285051@via.dk)
+ * @date 2021-11-23
+ */
 #include <iostream>
 #include <unistd.h>
 #include <math.h>
