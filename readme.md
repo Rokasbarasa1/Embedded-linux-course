@@ -1,6 +1,6 @@
 # Assignment 3 of embedded operating systems course
 
-The project is a greenhouse monitoring system that tracks temperature, humidity and light level. The system is hosted on a Beaglebone Black running Debian OS with meant for the Beaglebone black hardware. The environment is monitored with sensors connected to the Beaglebone. The Beaglebone hosts a Node.js server that serves a website with the sensor data displayed and some controls for led light, window open position with a servo or a heater being on or off. The node.js server has a socket connection to the website client and constantly updates the values on the client.
+The project is a greenhouse monitoring system that tracks temperature, humidity and light level. The system is hosted on a Beaglebone Black running Debian OS with changes meant for the Beaglebone black hardware. The environment is monitored with sensors connected to the Beaglebone. The Beaglebone hosts a Node.js server that serves a website with the sensor data displayed and some controls for led light, window open position with a servo or a heater being on or off. The node.js server has a socket connection to the website client and constantly updates the values on the client.
 
 Bellow is how the website looks like.
 
