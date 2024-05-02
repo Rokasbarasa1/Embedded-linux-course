@@ -13,7 +13,11 @@ The project is a greenhouse monitoring system that tracks temperature, humidity 
 
 Bellow is how the website looks like.
 
-![alt text](img/image.png)
+![alt text](image.png)
+
+Old picture of cabling i found
+![alt text](image2.png)
+
 
 Please look at the "EOS Assignment 3 Report.pdf" for more details.
 
