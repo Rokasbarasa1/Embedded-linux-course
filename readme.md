@@ -16,7 +16,7 @@ Bellow is how the website looks like.
 ![alt text](image.png)
 
 Old picture of cabling i found
-![alt text](image2.png)
+![alt text](image2.jpg)
 
 
 Please look at the "EOS Assignment 3 Report.pdf" for more details.
