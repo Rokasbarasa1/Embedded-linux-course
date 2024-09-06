@@ -19,7 +19,7 @@ Old picture of cabling i found
 ![alt text](image2.jpg)
 
 
-Please look at the "EOS Assignment 3 Report.pdf" for more details.
+# Please look at the "Assignment3/EOS Assignment 3 Report.pdf" for more details.
 
 ### Some compilation stuff bellow:
 
